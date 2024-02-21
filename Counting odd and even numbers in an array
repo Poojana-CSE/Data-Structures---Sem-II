@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main() {
+  int *arr;
+  int even=0,odd=0;
+  arr=(int*)malloc(5*sizeof(int));
+  printf("Enter numbers : ");
+  for(int i=0;i<5;i++)
+    {
+      scanf("%d",&arr[i]);
+      if(arr[i]%2==0)
+      {
+        even=even+1;
+      }
+      else
+      {
+        odd=odd+1;
+      }
+    }
+  printf("Total number of Even numbers %d\n",even);
+  printf("Total number of Even numbers %d",odd);
+  return 0;
+}
