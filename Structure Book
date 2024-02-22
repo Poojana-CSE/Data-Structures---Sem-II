@@ -1,0 +1,72 @@
+#include <stdio.h>
+struct book
+{
+char bname[100];
+char aname[100];
+int price;
+};
+int main() 
+{
+  struct book b[3];
+  int n1,n2,n3;
+  for(int i=0;i<3;i++)
+    {
+      printf("\nEnter the Book name : ");
+      scanf("%s",b[i].bname);
+      printf("\nEnter the Author name : ");
+      scanf("%s",b[i].aname);
+      printf("\nEnter the Price of the book : ");
+      scanf("%d",&b[i].price);
+    }
+  n1=b[0].price;
+  n2=b[1].price;
+  n3=b[2].price;
+  printf("\nBook's Information \n");
+  printf("\n Expensive Book : ");
+  if((n1>n2)&&(n1>n3))
+        {
+          printf("Book name : %s\n",b[0].bname);
+          printf("Author name : %s\n",b[0].aname);
+          printf("Price of the book : %d\n",b[0].price);
+        }
+      else if((n2>n1)&&(n2>n3))
+      {
+        printf("Book name : %s\n",b[1].bname);
+        printf("Author name : %s\n",b[1].aname);
+        printf("Price of the book : %d\n",b[1].price);
+      }
+      else if((n3>n1)&&(n3>n2))
+      {
+        printf("Book name : %s\n",b[2].bname);
+        printf("Author name : %s\n",b[2].aname);
+        printf("Price of the book : %d\n",b[2].price);
+      }
+      else
+      {
+        printf("Invalid");
+      }
+  printf("\nLow Priced Book \n");
+  if((n1<n2)&&(n1<n3))
+    {
+      printf("Book name : %s\n",b[0].bname);
+      printf("Author name : %s\n",b[0].aname);
+      printf("Price of the book : %d\n",b[0].price);
+    }
+  else if((n2<n1)&&(n2<n3))
+  {
+    printf("Book name : %s\n",b[1].bname);
+    printf("Author name : %s\n",b[1].aname);
+    printf("Price of the book : %d\n",b[1].price);
+  }
+  else if((n3<n1)&&(n3<n2))
+  {
+    printf("Book name : %s\n",b[2].bname);
+    printf("Author name : %s\n",b[2].aname);
+    printf("Price of the book : %d\n",b[2].price);
+  }
+  else
+  {
+    printf("Invalid");
+  }
+  return 0;
+}
