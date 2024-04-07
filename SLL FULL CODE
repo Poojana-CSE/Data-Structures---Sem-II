@@ -1,0 +1,158 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+  int data;
+  struct node *next;
+};
+
+void insert_end(struct node **head, int data) {
+  struct node *nn = (struct node *)malloc(sizeof(struct node));
+  nn->data = data;
+  nn->next = NULL;
+  if (*head == NULL) {
+    *head = nn;
+  } else {
+    struct node *temp = *head;
+    while (temp->next != NULL) {
+      temp = temp->next;
+    }
+    temp->next = nn;
+    nn->next = NULL;
+  }
+}
+void insert_beg(struct node **head, int data) {
+  struct node *nn = (struct node *)malloc(sizeof(struct node));
+  nn->data = data;
+  nn->next = NULL;
+  if (*head == NULL) {
+    *head = nn;
+  } else {
+    nn->next = *head;
+    *head = nn;
+  }
+}
+void insert_sp(struct node **head, int data, int pos) {
+  struct node *nn = (struct node *)malloc(sizeof(struct node));
+  nn->data = data;
+  nn->next = NULL;
+  if (pos == 1) {
+    insert_beg(head, data);
+  } else if (pos == 0) {
+    printf("\nInvalid Input");
+  } else {
+    struct node *temp = *head;
+    int i = 1;
+    for (i = 1; i < pos - 1; i++) {
+      temp = temp->next;
+    }
+    nn->next = temp->next;
+    temp->next = nn;
+  }
+}
+void count(struct node *head) {
+  int count = 0;
+  while (head != NULL) {
+    count++;
+    head = head->next;
+  }
+  printf("\nCount is %d", count);
+}
+void reverse(struct node *head) {
+  struct node *prev = NULL;
+  struct node *curr = head;
+  struct node *next = NULL;
+  while (curr != NULL) {
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+  }
+  head = prev;
+}
+void delete_beg(struct node **head) {
+  struct node *temp = *head;
+  *head = (*head)->next;
+  free(temp);
+}
+void delete_end(struct node **head) {
+  struct node *temp = *head;
+  struct node *prev;
+  while (temp->next != NULL) {
+    prev = temp;
+    temp = temp->next;
+  }
+  prev->next = NULL;
+  free(temp);
+}
+void delete_sp(struct node **head,int pos)
+{
+    struct node * temp = *head;
+    struct node * prev = temp;
+    if(pos==1)
+    {
+        delete_beg(head);
+    }
+    else if(pos==0)
+    {
+        printf("Invalid input");
+    }
+    else{
+        int i=1;
+        for(int i=1;i<pos;i++)
+        {
+            prev=temp;
+            temp=temp->next;
+        }
+        prev->next=temp->next;
+        free(temp);
+    }
+}
+void display(struct node *head) {
+  printf("\nElements:");
+  while (head != NULL) {
+    printf("%d", head->data);
+    head = head->next;
+  }
+  printf("\n");
+}
+
+int main() {
+  struct node *head = NULL;
+  int d1, d2, d3;
+  printf("\nEnter the data to append : ");
+  scanf("%d", &d1);
+  printf("\nEnter the data to append : ");
+  scanf("%d", &d2);
+  insert_end(&head, d1);
+  insert_end(&head, d2);
+  display(head);
+  int a1;
+  printf("\nEnter the data to insert at begining: ");
+  scanf("%d", &a1);
+  insert_beg(&head, a1);
+  display(head);
+  int pos;
+  int i1;
+  printf("\nEnter the position : ");
+  scanf("%d", &pos);
+  printf("\nEnter the data to insert at sp : ");
+  scanf("%d", &i1);
+  insert_sp(&head, i1, pos);
+  display(head);
+  //printf("\nReversed Linked List");
+  //reverse(head);
+  //display(head);
+  printf("\nDelete At Begining");
+  delete_beg(&head);
+  display(head);
+  printf("\nDelete At End");
+  delete_end(&head);
+  display(head);
+  int p1;
+  printf("\nEnter the position to delete :");
+  scanf("%d",&p1);
+  delete_sp(&head,pos);
+  display(head);
+  count(head);
+  return 0;
+}
