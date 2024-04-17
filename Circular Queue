@@ -1,0 +1,67 @@
+#include<stdio.h>
+#define max 10
+int Queue[max],front=-1,rear=-1;
+void enqueue(int value)
+{
+    //overflow
+    if((rear==max-1 && front==0) || front==rear+1)
+    {
+        printf("OverFlow");
+    }
+    else
+    {
+        if(front==-1)
+        front=0;
+        rear=(rear+1)%max;
+        Queue[rear]=value;
+    }
+}
+int dequeue()
+{
+    int deleted;
+    if(front==-1)
+    {
+        printf("Underflow");
+        return -1;
+    }
+    else
+    {
+        deleted=Queue[front];
+        if(front==rear)
+        {
+            front=rear=-1;
+        }
+        else
+        {
+            front=(front+1)%max;
+        }
+    }
+    return deleted;
+}
+void display()
+{
+    int i;
+    if(rear==-1 && front==-1)
+    {
+        printf("Queue Empty");
+    }
+    else
+    {
+        for(i=front;i!=rear;i=(i+1)%max)
+        {
+            printf("%d ",Queue[i]);
+        }
+        printf("%d ",Queue[i]);
+    }
+}
+int main()
+{
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    int element = dequeue();
+    printf("%d Is Deleted",element);
+    printf("\n");
+    display();
+    return 0;
+}
