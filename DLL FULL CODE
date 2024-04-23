@@ -42,7 +42,7 @@ void insert_sp(struct node **head, int data, int pos) {
   nn->next = NULL;
   nn->prev = NULL;
   if (pos == 1) {
-    insert_beg(head, pos);
+    insert_beg(head, data);
   } else {
     struct node *temp = *head;
     for (int i = 1; i < pos - 1; i++) {
