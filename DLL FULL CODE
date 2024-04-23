@@ -103,6 +103,20 @@ void delete_sp(struct node **head, int pos) {
     free(temp);
   }
 }
+void reverse(struct node **head) {
+  struct node *temp = NULL;
+  struct node *current = *head;
+
+  while (current != NULL) {
+    temp = current->prev;
+    current->prev = current->next;
+    current->next = temp;
+    current = current->prev;
+  }
+
+  if (temp != NULL)
+    *head = temp->prev;
+}
 
 void display(struct node *head) {
   while (head != NULL) {
@@ -146,13 +160,16 @@ int main() {
   printf("\nDelete At End \n");
   delete_end(&head);
   display(head);
-  printf("\nDelete At Begin \n"); 
+  printf("\nDelete At Begin \n");
   delete_beg(&head);
   display(head);
   int pos3;
   printf("\nEnter the position to delete : ");
   scanf("%d", &pos3);
   delete_sp(&head, pos3);
+  display(head);
+  printf("\n");
+  reverse(&head);
   display(head);
   count(head);
   return 0;
